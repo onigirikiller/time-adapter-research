@@ -3,6 +3,7 @@
 [![Research Preview](https://img.shields.io/badge/status-research%20preview-orange)](#research-status)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue)](#quick-start)
 [![License: MIT](https://img.shields.io/badge/code%20license-MIT-green)](LICENSE)
+[![Paper](https://img.shields.io/badge/paper-PDF-b31b1b)](paper/timing_before_talking.pdf)
 
 **Timing-aware turn-taking for spoken language models.** This repository explores a small external adapter that tells an audio-language model how long the user has been silent, so the model can decide whether to wait, backchannel, or respond without running full speech generation on every audio tick.
 
@@ -32,15 +33,16 @@ The high-frequency loop only scores action tokens. Text and speech generation st
 | Explicit-time recovery from Qwen3-4B hidden states | R² 0.999 |
 | Qwen2.5-Omni sequential Time Adapter + proxy head | accuracy 0.990 / macro F1 0.989 |
 | Qwen2.5-Omni single-token audio-only DirectLM | accuracy 0.998 / macro F1 0.998 |
-| Control-token + short-response LoRA | macro F1 0.997 |
+| Control-token + short-response LoRA | accuracy 0.998 / macro F1 0.998 |
 | Pseudo-realtime action-token scoring | p95 309.1 ms; 99.3% under 500 ms |
 
-The important negative result is also included: hidden-state injection alone did not make the base LM head a reliable action classifier. Directly training short control-token logits was substantially more effective. See [the Japanese research summary](docs/PROJECT_SUMMARY_JA.md) for the experiment sequence and limitations.
+The important negative result is also included: hidden-state injection alone did not make the base LM head a reliable action classifier. Directly training short control-token logits was substantially more effective. Read the [research preprint](paper/timing_before_talking.pdf) or [paper source and reproducibility notes](paper/README.md); the [Japanese research summary](docs/PROJECT_SUMMARY_JA.md) gives the experiment sequence and limitations.
 
 ## What is published
 
 ```text
 scripts/                 curated dataset, training, ablation, and runtime snapshots
+paper/                   reviewed preprint PDF, LaTeX source, and figures
 webui/omni_realtime_v1/  browser microphone interface for a compatible checkpoint
 docs/EXPERIMENTS.md      experiment map and recommended reading order
 docs/PUBLICATION_SCOPE.md publication and provenance boundaries

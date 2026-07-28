@@ -35,3 +35,12 @@ tmp_*/
 *.bin
 *.onnx
 *.docx
+
+# LaTeX build products (the reviewed PDF is committed explicitly)
+paper/build/
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/main.pdf

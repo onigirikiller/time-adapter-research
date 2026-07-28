@@ -10,7 +10,7 @@
 - Qwen2.5-Omniのhidden stateへTime Adapterを注入し、専用decision/proxy headで読む構成はaccuracy 0.990、macro F1 0.989だった。
 - 同じhidden注入を未学習のLM headへ直接読ませるだけではmacro F1 0.428に留まった。
 - `/W`, `/B`, `/S` を短い制御トークンとしてLoRA学習したDirectLM方式では、audio-only評価でaccuracy 0.998、macro F1 0.998だった。
-- 制御トークンと短文応答を同時学習した実験はmacro F1 0.997だった。
+- 制御トークンと短文応答を同時学習した実験はaccuracy 0.998、macro F1 0.998だった。
 - 疑似リアルタイムの制御判定はp95 309.1ms、500ms以内率99.3%だった。本文生成と音声合成は別経路に分ける必要がある。
 
 ## 推奨構成
@@ -32,8 +32,8 @@ microphone audio prefix
 |---|---|---:|---:|---|
 | Omni sequential v2 | correct Time Adapter + proxy head | 0.990 | 0.989 | exact sequence 0.920 |
 | Generation hook v3 | correct Time Adapter + base LM head | 0.578 | 0.428 | 目的関数の不一致を確認 |
-| DirectLM single-token | audio-only 1,000 contexts | 0.998 | 0.998 | exact sequence 0.980 |
-| Control + response | correct Time Adapter | 0.997 | 0.997 | 短文応答も同時学習 |
+| DirectLM single-token | audio-only 1,000 timepoints | 0.998 | 0.998 | exact sequence 0.980 |
+| Control + response | correct Time Adapter, 500 timepoints | 0.998 | 0.998 | 短文応答も同時学習 |
 
 ## 解釈
 

@@ -3,7 +3,10 @@ message: "If you use this research code, please cite it using the metadata below
 title: "Time Adapter Research: Timing-Aware Turn-Taking for Spoken Language Models"
 type: software
 authors:
-  - family-names: "Towa"
+  - family-names: "Yoshida"
+    given-names: "Towa"
+    affiliation: "Rissho University"
+    orcid: "https://orcid.org/0009-0002-1715-0219"
 repository-code: "https://github.com/onigirikiller/time-adapter-research"
 url: "https://github.com/onigirikiller/time-adapter-research"
 license: MIT
@@ -15,3 +18,13 @@ keywords:
   - audio language model
   - LoRA
   - timing adapter
+preferred-citation:
+  type: article
+  title: "Timing Before Talking: Time Adapters for Low-Latency Turn-Taking in Spoken Language Models"
+  authors:
+    - family-names: "Yoshida"
+      given-names: "Towa"
+      affiliation: "Rissho University"
+      orcid: "https://orcid.org/0009-0002-1715-0219"
+  year: 2026
+  repository-code: "https://github.com/onigirikiller/time-adapter-research"
