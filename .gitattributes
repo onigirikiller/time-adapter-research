@@ -11,3 +11,5 @@ LICENSE text eol=lf
 *.pt binary
 *.pth binary
 *.wav binary
+*.pdf binary
+*.zip binary

@@ -1,7 +1,9 @@
 # Research preprint
 
-**Timing Before Talking: Time Adapters for Low-Latency Turn-Taking in Spoken Language Models**  
-Towa Yoshida, Rissho University  
+**Timing Before Talking: Time Adapters for Low-Latency Turn-Taking in Spoken Language Models**
+
+Towa Yoshida, Rissho University
+
 ORCID: <https://orcid.org/0009-0002-1715-0219>
 
 - Reviewed PDF: [`timing_before_talking.pdf`](timing_before_talking.pdf)
