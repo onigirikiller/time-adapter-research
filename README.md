@@ -44,6 +44,7 @@ scripts/                 curated dataset, training, ablation, and runtime snapsh
 webui/omni_realtime_v1/  browser microphone interface for a compatible checkpoint
 docs/EXPERIMENTS.md      experiment map and recommended reading order
 docs/PUBLICATION_SCOPE.md publication and provenance boundaries
+THIRD_PARTY_NOTICES.md    dependency and model-license boundaries
 data/README.md           reproducible data layouts; no dataset rows or audio
 requirements.txt         practical top-level dependencies
 ```
@@ -96,6 +97,10 @@ Contributions that improve reproducibility, evaluation coverage, or the separati
 
 ## License and citation
 
-The repository's original source code and documentation are released under the [MIT License](LICENSE). Model code, base-model weights, generated voices, and third-party packages retain their own licenses and terms. No rights to those external assets are granted here.
+The repository's original source code and documentation are released under the [MIT License](LICENSE). That license does not apply to downloaded models or third-party packages.
+
+**Important model restriction:** `Qwen/Qwen2.5-Omni-3B`, used by the Omni experiment family, is distributed under the [Qwen Research License](https://huggingface.co/Qwen/Qwen2.5-Omni-3B/blob/main/LICENSE), not MIT or Apache-2.0. Its upstream terms limit the model materials to non-commercial research or evaluation unless a separate commercial license is obtained. This repository does not distribute that model or any LoRA, adapter, or checkpoint derived from it. The MIT license for this repository's original code remains unchanged, but it does not grant commercial rights to use Qwen2.5-Omni-3B.
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the audited dependency/model inventory and binary redistribution cautions. Model code, base-model weights, generated voices, and third-party packages retain their own licenses and terms. No rights to those external assets are granted here.
 
 Citation metadata is available in [CITATION.cff](CITATION.cff).
