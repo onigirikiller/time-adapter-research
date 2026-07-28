@@ -1,0 +1,20 @@
+# Install the machine-appropriate CUDA/CPU PyTorch build first.
+accelerate==1.12.0
+fastapi==0.138.0
+imageio==2.37.3
+imageio-ffmpeg==0.6.0
+librosa==0.11.0
+matplotlib==3.11.0
+numpy==2.4.4
+peft==0.19.1
+pillow==12.2.0
+pywin32==312; platform_system == "Windows"
+qwen-omni-utils==0.0.9
+qwen-tts==0.1.1
+scikit-learn==1.9.0
+scipy==1.18.0
+soundfile==0.14.0
+transformers @ git+https://github.com/huggingface/transformers.git@11ed2ff4df5fdfb3117f0e3365ef6ad94081ba69
+triton-windows==3.7.1.post27; platform_system == "Windows"
+uvicorn==0.49.0
+websockets==16.0

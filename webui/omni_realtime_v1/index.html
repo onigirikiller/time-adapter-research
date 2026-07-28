@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Omni3B Realtime Time Adapter Console</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <h1>Omni3B Realtime Time Adapter</h1>
+          <p>Mic → VAD timer → Time Adapter hook → DirectLM action token → speech backend</p>
+        </div>
+        <div class="status-pill" id="modelStatus">model: unknown</div>
+      </header>
+
+      <section class="controls">
+        <button id="loadBtn">Load model</button>
+        <label class="adapter-control">
+          Decision LoRA
+          <select id="adapterSelect" disabled>
+            <option value="english">English 3-action LoRA</option>
+          </select>
+        </label>
+        <button id="startBtn" disabled>Start mic</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <button id="clearBtn">Clear UI</button>
+        <button id="refreshDevicesBtn">Refresh devices</button>
+        <label>
+          Audio input
+          <select id="inputDevice">
+            <option value="">Default microphone</option>
+          </select>
+        </label>
+        <label>
+          Audio output
+          <select id="outputDevice">
+            <option value="">Default speaker</option>
+          </select>
+        </label>
+        <label>
+          VAD threshold
+          <input id="vadThreshold" type="range" min="0.001" max="0.05" step="0.001" value="0.010" />
+          <span id="vadValue">0.010</span>
+        </label>
+        <label>
+          Tick
+          <select id="tickSeconds">
+            <option value="0.25">0.25s</option>
+            <option value="0.5" selected>0.5s</option>
+            <option value="0.75">0.75s</option>
+            <option value="1.0">1.0s</option>
+          </select>
+        </label>
+        <label>
+          Context
+          <select id="contextSeconds">
+            <option value="12">12s</option>
+            <option value="24" selected>24s</option>
+            <option value="36">36s</option>
+          </select>
+        </label>
+        <label class="check">
+          <input id="bargeIn" type="checkbox" checked />
+          stop assistant audio when user speaks
+        </label>
+      </section>
+
+      <section class="grid">
+        <div class="panel live">
+          <h2>Live State</h2>
+          <div class="metrics">
+            <div><span>Session</span><b id="sessionId">-</b></div>
+            <div><span>Mic SR</span><b id="sampleRate">-</b></div>
+            <div><span>Clock</span><b id="clock">0.00s</b></div>
+            <div><span>RMS</span><b id="rms">0.0000</b></div>
+            <div><span>VAD</span><b id="vadState">idle</b></div>
+            <div><span>Silence</span><b id="silence">0.00s</b></div>
+            <div><span>Last Label</span><b id="lastLabel">-</b></div>
+            <div><span>Skipped</span><b id="skips">0</b></div>
+            <div><span>Client</span><b id="clientState">idle</b></div>
+          </div>
+          <canvas id="probCanvas" width="860" height="280"></canvas>
+          <div class="legend">
+            <span class="wait">WAIT</span>
+            <span class="back">BACKCHANNEL</span>
+            <span class="support">SUPPORT</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Latest Tick</h2>
+          <div class="big-label" id="bigLabel">/W /B /S</div>
+          <div class="bars">
+            <label>WAIT <meter id="mWait" min="0" max="1" value="0"></meter><span id="pWait">0.000</span></label>
+            <label>BACKCHANNEL <meter id="mBack" min="0" max="1" value="0"></meter><span id="pBack">0.000</span></label>
+            <label>SUPPORT <meter id="mSupport" min="0" max="1" value="0"></meter><span id="pSupport">0.000</span></label>
+          </div>
+          <h2 id="actionProbabilitiesTitle" hidden>All action probabilities</h2>
+          <div id="actionProbabilities" class="action-probabilities" hidden></div>
+          <h2>Latency</h2>
+          <div class="metrics small">
+            <div><span>prep</span><b id="latPrep">-</b></div>
+            <div><span>forward</span><b id="latForward">-</b></div>
+            <div><span>label total</span><b id="latLabel">-</b></div>
+            <div><span>text gen</span><b id="latText">-</b></div>
+            <div><span>speech</span><b id="latTalker">-</b></div>
+          </div>
+          <h2>Assistant</h2>
+          <div id="assistantText" class="assistant-text">-</div>
+        </div>
+      </section>
+
+      <section class="panel log-panel">
+        <div class="log-head">
+          <h2>Event / Tick Log</h2>
+          <span id="logPath">local logs are saved under artifacts/omni3b_realtime_webui_v1</span>
+        </div>
+        <div class="log-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>time</th>
+                <th>type</th>
+                <th>label</th>
+                <th>silence</th>
+                <th>probabilities</th>
+                <th>latency</th>
+                <th>response</th>
+              </tr>
+            </thead>
+            <tbody id="logBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

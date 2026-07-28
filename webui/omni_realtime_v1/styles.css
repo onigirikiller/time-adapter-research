@@ -1,0 +1,358 @@
+:root {
+  color-scheme: dark;
+  --bg: #101317;
+  --panel: #171c22;
+  --panel2: #1d242c;
+  --text: #e7edf4;
+  --muted: #9aa7b5;
+  --line: #2d3742;
+  --wait: #6fa8ff;
+  --back: #ffd36f;
+  --support: #65d68a;
+  --bad: #ff6f7d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.app {
+  width: min(1440px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 18px 0 28px;
+}
+
+.topbar,
+.controls,
+.panel {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 8px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #cfd8e3;
+}
+
+.topbar p {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.status-pill {
+  white-space: nowrap;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--panel2);
+  color: var(--muted);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+  padding: 12px;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  border: 1px solid #3a4654;
+  color: var(--text);
+  background: #243140;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: #2b3b4e;
+}
+
+select {
+  border: 1px solid #3a4654;
+  background: #12171d;
+  color: var(--text);
+  border-radius: 6px;
+  padding: 6px 8px;
+  max-width: 260px;
+}
+
+label {
+  color: var(--muted);
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.check {
+  margin-left: auto;
+}
+
+.grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(320px, 0.9fr);
+  gap: 12px;
+}
+
+.panel {
+  padding: 14px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.metrics.small {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.metrics div {
+  background: var(--panel2);
+  border-radius: 6px;
+  padding: 8px;
+  min-width: 0;
+}
+
+.metrics span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metrics b {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 280px;
+  background: #0c1014;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.legend span::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.legend .wait::before {
+  background: var(--wait);
+}
+
+.legend .back::before {
+  background: var(--back);
+}
+
+.legend .support::before {
+  background: var(--support);
+}
+
+.big-label {
+  font-size: 28px;
+  font-weight: 700;
+  background: #0c1014;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.bars {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.adapter-control select {
+  min-width: 210px;
+}
+
+.action-probabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 10px;
+  margin: -4px 0 16px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0c1014;
+}
+
+#actionProbabilitiesTitle {
+  margin-top: 2px;
+}
+
+.action-probabilities[hidden] {
+  display: none;
+}
+
+.action-probability {
+  display: grid;
+  grid-template-columns: minmax(112px, 1fr) minmax(70px, 1fr) 46px;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.action-probability span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.action-probability meter {
+  height: 14px;
+}
+
+.action-probability b {
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.bars label {
+  display: grid;
+  grid-template-columns: 120px 1fr 52px;
+}
+
+meter {
+  width: 100%;
+  height: 18px;
+}
+
+.assistant-text {
+  min-height: 64px;
+  background: var(--panel2);
+  border-radius: 6px;
+  padding: 10px;
+  color: #dbe7f4;
+}
+
+.log-panel {
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.log-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.log-scroll {
+  max-height: min(360px, 42vh);
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0c1014;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th,
+td {
+  border-top: 1px solid var(--line);
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #111820;
+}
+
+td:nth-child(1) {
+  width: 80px;
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .check {
+    margin-left: 0;
+  }
+
+  .action-probabilities {
+    grid-template-columns: 1fr;
+  }
+}

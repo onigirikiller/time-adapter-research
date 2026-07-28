@@ -1,0 +1,13 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+*.cff text eol=lf
+*.yml text eol=lf
+LICENSE text eol=lf
+*.safetensors binary
+*.pt binary
+*.pth binary
+*.wav binary
